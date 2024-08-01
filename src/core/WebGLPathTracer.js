@@ -343,6 +343,7 @@ export class WebGLPathTracer {
 			geometry,
 			bvh,
 			bvhChanged,
+			needsMaterialIndexUpdate,
 		} = results;
 
 		this._materials = materials;
@@ -359,6 +360,10 @@ export class WebGLPathTracer {
 				geometry.attributes.uv,
 				geometry.attributes.color,
 			);
+
+		}
+
+		if ( needsMaterialIndexUpdate ) {
 
 			material.materialIndexAttribute.updateFrom( geometry.attributes.materialIndex );
 
@@ -490,8 +495,8 @@ export class WebGLPathTracer {
 
 	dispose() {
 
-		this._renderQuad.dispose();
-		this._renderQuad.material.dispose();
+		this._quad.dispose();
+		this._quad.material.dispose();
 		this._pathTracer.dispose();
 
 	}

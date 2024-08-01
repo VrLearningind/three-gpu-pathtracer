@@ -407,6 +407,7 @@ function updateEnvMap() {
 			texture.mapping = EquirectangularReflectionMapping;
 			scene.environment = texture;
 			pathTracer.updateEnvironment();
+			onParamsChange();
 
 		} );
 
@@ -703,7 +704,7 @@ async function loadModel( url, onProgress ) {
 
 		manager.onProgress = ( url, loaded, total ) => {
 
-			loader.setPercentage( loaded / total );
+			onProgress( loaded / total );
 
 		};
 
